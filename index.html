@@ -1,0 +1,243 @@
+---
+layout: default
+title: like attracts like
+---
+        
+<hr>
+<div class="main">
+    <div class="view">
+        <center>
+          <p>view the page</p>
+          <hr>
+            <img src="assets/like_attracts_like_typewritten.jpg">
+        </center>
+    </div>
+    <div class="type">
+      <center>
+        <p>progress down the page</p>
+        <hr>
+        <iframe width="560" max-width="90%" height="315" src="https://www.youtube.com/embed/E7-h9UkXpSg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </center>
+    </div>
+
+    <div class="animate">
+      <center style="margin-bottom: 2rem">
+        <p>progress across frames</p>
+        
+        <hr>
+
+        <div><a href="javascript:void(0)" id="animate">animate</a></div>
+        <div><a href="javascript:void(0)" id="speed">faster</a></div>
+        <div><a href="javascript:void(0)" id="reset">reset</a></div>
+        <hr>
+        </center>
+        
+        <div id="like">
+            like                        like
+        </div>
+        
+        <div id="attracts">
+            attracts
+        </div>
+        
+
+    </div>
+    <div class="multiply">
+      <center>
+      <p><a href="javascript:void(0)" id="multiply">add</a> objects</p>
+      <hr>
+        <div>
+          <a href="javascript:void(0)" id="recreate">recreate the poem</a>
+        </div>
+        <div>
+          <a href="javascript:void(0)" id="animateAll">animate all</a>
+        </div>
+        <div>
+          <a href="javascript:void(0)" id="resetAll">reset all</a>
+        </div>
+      <hr>
+      <div id="original">
+        <div class="like">
+          like                        like
+        </div>
+        <div class="attracts">
+          attracts
+        </div>
+      </div>
+
+    </center>
+    </div>
+
+    <div class="watch">
+      <center>
+      <video width="560" max-width="90%" height="315" controls>
+        <source src="/assets/like_attracts_like_concrete.mov" type="video/mp4">
+        <source src="movie.ogg" type="video/ogg">
+      Your browser does not support the video tag.
+      </video>
+    </center>
+    </div>
+
+  </div>
+
+<script>
+    animateButton = document.getElementById("animate");
+    speedButton = document.getElementById("speed");
+    resetButton = document.getElementById("reset");
+    multiplyButton = document.getElementById("multiply");
+    animateAll = document.getElementById("animateAll");
+    recreate = document.getElementById("recreate");
+    resetAll = document.getElementById("resetAll");
+
+    resetButton.style.visibility = "hidden";
+    speedSlow = true;
+    increment = 1;
+
+    likeText = document.getElementById("like");
+    likeText.innerText = "like                        like";
+    var numSpaces = 24;
+
+    animateButton.addEventListener("click", function() {
+        var interval = setInterval(function() { 
+        if (numSpaces >= 0) { 
+            var i;
+            var text = "like";
+            for (i=0; i<numSpaces;i++) {
+                text += " ";
+            }
+            text += "like";
+            likeText.innerText = text;
+            numSpaces -= increment;
+            if (numSpaces == 1 && increment == 2) {
+              numSpaces++;
+            }
+            if (numSpaces < 0) {
+              resetButton.style.visibility = "visible";
+            }
+        }
+        else { 
+            clearInterval(interval);
+        }}, 500);
+        
+    });
+
+    resetButton.addEventListener("click", function() {
+        resetButton.style.visibility = "hidden";
+        likeText = document.getElementById("like");
+        likeText.innerText = "like                        like";
+        numSpaces = 24;
+    });
+
+    speedButton.addEventListener("click", function() {
+      speedSlow = !speedSlow;
+      if(speedSlow) {
+        increment = 1;
+        speedButton.innerText = "faster";
+      } else {
+        increment = 2;
+        speedButton.innerText = "slower";
+      }
+    });
+
+    multiplyButton.addEventListener("click", function() {
+      const newDiv = document.createElement("div");
+
+      var sc = parseInt(Math.random()*15) + 18;
+
+      var i, spaces = '';
+      for (i=0;i<sc;i++) {
+        spaces += ' ';
+      }
+
+      var s = '<div class="like">like'+spaces+'like</div><div class="attracts">attracts</div>';
+
+      newDiv.innerHTML = s;
+
+      const currentDiv = document.getElementById("original");
+      currentDiv.appendChild(newDiv);
+    });
+
+    var maxSpaceCount = 1;
+    resetAll.style.visibility = "hidden";
+    recreate.style.visibility = "visible";
+    
+    recreate.addEventListener("click", function() {
+        resetAll.style.visibility = "hidden";
+        likes = document.querySelectorAll(".like");
+        attracts = document.querySelectorAll(".attracts");
+
+        resetPoem();
+
+        for(var sc=22; sc>=0; sc-=2) {
+          const newDiv = document.createElement("div");
+
+          var spaces = '';
+          for (var i=0;i<sc;i++) {
+            spaces += ' ';
+          }
+
+          var s = '<div class="like">like'+spaces+'like</div><div class="attracts">attracts</div>';
+
+          newDiv.innerHTML = s;
+
+          const currentDiv = document.getElementById("original");
+          currentDiv.appendChild(newDiv);
+        } 
+    });
+
+    animateAll.addEventListener("click", function() {
+        var likes = document.querySelectorAll('.like');
+        var interval = setInterval(function() {
+        
+        if (maxSpaceCount > 0) { 
+          maxSpaceCount = 0;
+          for(var j = 0; j < likes.length; j++) {
+            if (likes[j].innerText.length > 8) {
+              spaceCount = likes[j].innerText.length - 8;
+
+              spaceCount--;
+
+              if (spaceCount > maxSpaceCount) {
+                maxSpaceCount = spaceCount;
+              }
+
+              var text = "like";
+              for (var i=0; i<spaceCount;i++) {
+                text += " ";
+              }
+              text += "like";
+              likes[j].innerText = text;
+            }
+          }
+          console.log(maxSpaceCount);
+        }
+        else { 
+            clearInterval(interval);
+            resetAll.style.visibility = "visible";
+            recreate.style.visibility = "visible";
+        }}, 500);
+        
+    });
+
+    resetAll.addEventListener("click", function() {
+        resetPoem();
+    });
+
+    function resetPoem() {
+      resetAll.style.visibility = "hidden";
+        likes = document.querySelectorAll(".like");
+        attracts = document.querySelectorAll(".attracts");
+
+        for(var i=1;i<likes.length;i++) {
+          likes[i].remove();
+        }
+
+        for(var i=1;i<attracts.length;i++) {
+          attracts[i].remove();
+        }
+
+        likes[0].innerText = 'like                        like';
+        maxSpaceCount = 24;
+    }
+
+</script>

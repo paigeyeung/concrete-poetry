@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  {% include head.html %}
+  <body>
+    
+    <div class="content-container">
+          {% include nav.html %}
+          {{ content }}
+
+    <script>
+      var curr = $(".view");
+      $(".nav input[type='radio']").on('change', function() {
+        curr.hide();
+        curr = $("." + $(".nav input[type='radio']:checked").val() );
+        curr.show();
+      });
+    </script>
+  {% include foot.html %}
