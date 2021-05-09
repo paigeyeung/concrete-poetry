@@ -44,7 +44,7 @@ title: like attracts like
     </div>
     <div class="multiply">
       <center>
-      <p><a href="javascript:void(0)" id="multiply">add</a> objects</p>
+      <p><a href="javascript:void(0)" id="multiply">create</a> objects</p>
       <hr>
         <div>
           <a href="javascript:void(0)" id="recreate">recreate the poem</a>
@@ -70,6 +70,8 @@ title: like attracts like
 
     <div class="watch">
       <center>
+        <p>watch the objects</p>
+        <hr>
       <video width="560" max-width="90%" height="315" controls>
         <source src="/assets/like_attracts_like_concrete.mov" type="video/mp4">
         <source src="movie.ogg" type="video/ogg">
@@ -142,7 +144,7 @@ title: like attracts like
     multiplyButton.addEventListener("click", function() {
       const newDiv = document.createElement("div");
 
-      var sc = parseInt(Math.random()*15) + 18;
+      var sc = parseInt(Math.random()*24);
 
       var i, spaces = '';
       for (i=0;i<sc;i++) {
