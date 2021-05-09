@@ -27,7 +27,7 @@ title: like attracts like
         <hr>
 
         <div><a href="javascript:void(0)" id="animate">animate</a></div>
-        <div><a href="javascript:void(0)" id="speed">faster</a></div>
+        <div><a href="javascript:void(0)" id="speed">slower</a></div>
         <div><a href="javascript:void(0)" id="reset">reset</a></div>
         <hr>
         </center>
@@ -92,8 +92,8 @@ title: like attracts like
     resetAll = document.getElementById("resetAll");
 
     resetButton.style.visibility = "hidden";
-    speedSlow = true;
-    increment = 1;
+    speedSlow = false;
+    increment = 2;
 
     likeText = document.getElementById("like");
     likeText.innerText = "like                        like";
@@ -144,7 +144,7 @@ title: like attracts like
     multiplyButton.addEventListener("click", function() {
       const newDiv = document.createElement("div");
 
-      var sc = parseInt(Math.random()*24);
+      var sc = 2*parseInt(Math.random()*12.5);
 
       var i, spaces = '';
       for (i=0;i<sc;i++) {
@@ -159,7 +159,7 @@ title: like attracts like
       currentDiv.appendChild(newDiv);
     });
 
-    var maxSpaceCount = 1;
+    var maxSpaceCount = 24;
     resetAll.style.visibility = "hidden";
     recreate.style.visibility = "visible";
     
@@ -197,7 +197,7 @@ title: like attracts like
             if (likes[j].innerText.length > 8) {
               spaceCount = likes[j].innerText.length - 8;
 
-              spaceCount--;
+              spaceCount-=2;
 
               if (spaceCount > maxSpaceCount) {
                 maxSpaceCount = spaceCount;
