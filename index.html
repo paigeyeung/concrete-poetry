@@ -146,8 +146,12 @@ title: like attracts like
 
       var sc = 2*parseInt(Math.random()*12.5);
 
-      var i, spaces = '';
-      for (i=0;i<sc;i++) {
+      if(sc > maxSpaceCount) {
+        maxSpaceCount = sc;
+      }
+
+      var spaces = '';
+      for (var i=0;i<sc;i++) {
         spaces += ' ';
       }
 
