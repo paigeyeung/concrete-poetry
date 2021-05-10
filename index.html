@@ -102,7 +102,10 @@ title: like attracts like
     likeText.innerText = "like                        like";
     var numSpaces = 24;
 
+    var animateButtonClicked = false;
     animateButton.addEventListener("click", function() {
+      if(!animateButtonClicked) {
+        animateButtonClicked = true;
         var interval = setInterval(function() { 
         if (numSpaces >= 0) { 
             var i;
@@ -121,8 +124,11 @@ title: like attracts like
             }
         }
         else { 
+            animateButtonClicked = false;
             clearInterval(interval);
         }}, 500);
+
+      }
         
     });
 
@@ -194,7 +200,14 @@ title: like attracts like
         } 
     });
 
+    var animateAllButtonClicked = false;
+
     animateAll.addEventListener("click", function() {
+      if(!animateAllButtonClicked) {
+        animateAllButtonClicked = true;
+        recreate.style.visibility = "hidden";
+        multiplyButton.style.visibility = "hidden";
+
         var likes = document.querySelectorAll('.like');
         var interval = setInterval(function() {
         
@@ -222,9 +235,13 @@ title: like attracts like
         }
         else { 
             clearInterval(interval);
+            multiplyButton.style.visibility = "visible";
             resetAll.style.visibility = "visible";
             recreate.style.visibility = "visible";
+            animateAllButtonClicked = false;
         }}, 500);
+
+      }
         
     });
 
